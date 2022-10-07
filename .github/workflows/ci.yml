@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: gtk-build
-          path: C:\gtk-build
+          path: C:\gtk-build\build
       - name: Copy wheels to the build directory
         if: steps.cache.outputs.cache-hit != 'true'
         run: Get-ChildItem C:\gtk-build\build\x64\release\*\dist\*.whl | ForEach-Object -process { cp $_ C:\gtk-build\gtk\x64\release\ }

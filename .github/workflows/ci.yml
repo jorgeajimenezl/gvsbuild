@@ -65,11 +65,13 @@ jobs:
           poetry run gvsbuild build --enable-gi --py-wheel gtk3 graphene
           gobject-introspection pycairo pygobject adwaita-icon-theme hicolor-icon-theme
           gtksourceview4
+      - name: Archiving the build
+        run: Compress-Archive C:\gtk-build\build C:\gtk-build\build\release.zip
       - name: Upload gtk-build
         uses: actions/upload-artifact@v3
         with:
           name: gtk-build
-          path: C:\gtk-build\build
+          path: C:\gtk-build\build\release.zip
       - name: Copy wheels to the build directory
         if: steps.cache.outputs.cache-hit != 'true'
         run: Get-ChildItem C:\gtk-build\build\x64\release\*\dist\*.whl | ForEach-Object -process { cp $_ C:\gtk-build\gtk\x64\release\ }
